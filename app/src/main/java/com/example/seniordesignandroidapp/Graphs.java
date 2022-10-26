@@ -24,7 +24,7 @@ public class Graphs extends AppCompatActivity {
         // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        GraphView graph = (GraphView) findViewById(R.id.graph1);
+        GraphView graph1 = (GraphView) findViewById(R.id.graph1);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
                 new DataPoint(0, 1),
                 new DataPoint(1, 5),
@@ -32,7 +32,20 @@ public class Graphs extends AppCompatActivity {
                 new DataPoint(3, 2),
                 new DataPoint(4, 6)
         });
-        graph.addSeries(series);
+        graph1.addSeries(series);
+
+
+        double y,x;
+        x = -5.0;
+
+        GraphView graph2 = (GraphView) findViewById(R.id.graph2);
+        series = new LineGraphSeries<DataPoint>();
+        for(int i =0; i<500; i++) {
+            x = x + 0.1;
+            y = Math.sin(x);
+            series.appendData(new DataPoint(x, y), true, 500);
+        }
+        graph2.addSeries(series);
     }
 
     // this event will enable the back
