@@ -119,7 +119,7 @@ public class Cloud extends AppCompatActivity {
         // use intents to request action from another app component
 
         Intent intent = new Intent();
-        intent.setType("application/pdf");
+        intent.setType("text/plain");
         intent.setAction(Intent.ACTION_GET_CONTENT); // will fetch the files
         startActivityForResult(intent, 86);
 
