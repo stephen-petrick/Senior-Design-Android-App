@@ -35,6 +35,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
@@ -65,6 +68,8 @@ public class Bluetooth extends AppCompatActivity {
     private Button mDiscoverBtn;
     private ListView mDevicesListView;
     private CheckBox mLED1;
+    private Button readBtn;
+    private TextView text;
 
     private BluetoothAdapter mBTAdapter;
     private Set<BluetoothDevice> mPairedDevices;
@@ -92,6 +97,8 @@ public class Bluetooth extends AppCompatActivity {
         mDiscoverBtn = (Button) findViewById(R.id.discover);
         mListPairedDevicesBtn = (Button) findViewById(R.id.paired_btn);
         mLED1 = (CheckBox) findViewById(R.id.checkbox_led_1);
+        readBtn = (Button) findViewById(R.id.read_file);
+        text = (TextView) findViewById(R.id.text_file);
 
         mBTArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         mBTAdapter = BluetoothAdapter.getDefaultAdapter(); // get a handle on the bluetooth radio
@@ -108,6 +115,13 @@ public class Bluetooth extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_SCAN}, 1);
 
+        readBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String content = readFromFile("file.txt");
+                text.setText(content);
+            }
+        });
 
         mHandler = new Handler(Looper.getMainLooper()) {
             @Override
@@ -116,6 +130,18 @@ public class Bluetooth extends AppCompatActivity {
                     String readMessage = null;
                     readMessage = new String((byte[]) msg.obj, StandardCharsets.UTF_8);
                     mReadBuffer.setText(readMessage);
+
+                    File path = getApplicationContext().getFilesDir();
+                    try {
+                        FileOutputStream writer = new FileOutputStream(new File(path, "file.txt"));
+                        writer.write(readMessage.getBytes());
+                        writer.close();
+                        Toast.makeText(getApplicationContext(),
+                                "Wrote to file: " + "file.txt", Toast.LENGTH_SHORT).show();
+//            text.setText(path.toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 if (msg.what == CONNECTING_STATUS) {
@@ -170,6 +196,21 @@ public class Bluetooth extends AppCompatActivity {
                     discover();
                 }
             });
+        }
+    }
+
+    public String readFromFile(String fileName) {
+        File path = getApplicationContext().getFilesDir();
+        File readFrom = new File(path, fileName);
+        byte[] content = new byte[(int) readFrom.length()];
+
+        try {
+            FileInputStream stream = new FileInputStream(readFrom);
+            stream.read(content);
+            return new String(content);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e.toString();
         }
     }
 

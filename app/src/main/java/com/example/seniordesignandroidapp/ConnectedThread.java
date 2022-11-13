@@ -39,32 +39,7 @@ public class ConnectedThread extends Thread {
         byte[] buffer = new byte[1024];  // buffer store for the stream
         int bytes; // bytes returned from read()
 
-
-//        File targetFile = new File("targetFile.txt");
-//        try {
-//            targetFile.createNewFile();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        if (!targetFile.exists()) {
-//            try {
-//                targetFile.createNewFile();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        // Keep listening to the InputStream until an exception occurs
-//        String str = "New File\n";
-//        byte[] data = str.getBytes(StandardCharsets.UTF_8);  // Troubleshoot w/ str.getBytes()
         OutputStream outStream = null;
-//        try {
-//            outStream = new FileOutputStream(targetFile);
-//            outStream.write(data);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            IOUtils.closeQuietly(outStream);
-//        }
 
 
 
@@ -74,30 +49,14 @@ public class ConnectedThread extends Thread {
                 // Read from the InputStream
                 bytes = mmInStream.available();
                 if(bytes != 0) {
-                    buffer = new byte[bytes];
-                    SystemClock.sleep(100); //pause and wait for rest of data. Adjust this depending on your sending speed.
+                    buffer = new byte[1024];
+                    SystemClock.sleep(1000); //pause and wait for rest of data. Adjust this depending on your sending speed.
                     bytes = mmInStream.available(); // how many bytes are ready to be read?
                     bytes = mmInStream.read(buffer, 0, bytes); // record how many bytes we actually read
                     mHandler.obtainMessage(Bluetooth.MESSAGE_READ, bytes, -1, buffer)
                             .sendToTarget(); // Send the obtained bytes to the UI activity
 
-//                    // data to file
-//                    outStream = new FileOutputStream(targetFile);
-//                    outStream.write(buffer,0,bytes);
-////                    IOUtils.closeQuietly(outStream);
-//                    outStream.close();
                 }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                break;
-//            }
-//            finally {
-//                IOUtils.closeQuietly(outStream);
-//            }
-
-
-
-//        }
             } catch (IOException e) {
                 e.printStackTrace();
 
