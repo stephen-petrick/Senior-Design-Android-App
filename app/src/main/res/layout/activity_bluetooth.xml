@@ -112,7 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="208dp"
         android:isScrollContainer="false"
-        android:overScrollMode="ifContentScrolls"
+        android:overScrollMode="never"
         android:scrollbars="vertical"
         android:text="Read from file"
         android:textSize="20sp"
