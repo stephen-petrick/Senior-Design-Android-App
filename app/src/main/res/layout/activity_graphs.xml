@@ -8,8 +8,8 @@
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph1"
-        android:layout_width="384dp"
-        android:layout_height="341dp"
+        android:layout_width="396dp"
+        android:layout_height="257dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -19,13 +19,29 @@
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph2"
-        android:layout_width="373dp"
-        android:layout_height="281dp"
+        android:layout_width="393dp"
+        android:layout_height="240dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/graph1" />
+        app:layout_constraintTop_toBottomOf="@+id/graph1"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/graph_data"
+        android:layout_width="390dp"
+        android:layout_height="185dp"
+        android:layout_marginTop="12dp"
+        android:scrollbars="vertical"
+        android:text="TextView"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/graph2"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
