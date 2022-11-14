@@ -31,7 +31,7 @@ import com.google.firebase.storage.UploadTask;
 
 public class Cloud extends AppCompatActivity {
 
-    Button select_file, upload;
+    Button select_file, upload, hardcodedFile;
     TextView notification;
     Uri fileUri; // Uri are URLs that are meant for local storage
     ProgressDialog progressDialog;
@@ -57,6 +57,7 @@ public class Cloud extends AppCompatActivity {
         select_file = findViewById(R.id.selectFile);
         upload = findViewById(R.id.upload);
         notification = findViewById(R.id.notification);
+        hardcodedFile = findViewById(R.id.hardcoded_button);
 
         select_file.setOnClickListener(view -> {
 
@@ -81,6 +82,12 @@ public class Cloud extends AppCompatActivity {
                 Toast.makeText(Cloud.this, "Select a file", Toast.LENGTH_SHORT).show();
             }
 
+        });
+
+        hardcodedFile.setOnClickListener(view -> {
+
+            fileUri = Uri.parse("/data/user/0/com.example.seniordesignandroidapp/file/file.txt");
+            uploadFile(fileUri);
         });
 
     }
