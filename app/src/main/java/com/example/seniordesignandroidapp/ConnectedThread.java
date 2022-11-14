@@ -49,10 +49,12 @@ public class ConnectedThread extends Thread {
                 // Read from the InputStream
                 bytes = mmInStream.available();
                 if(bytes != 0) {
-                    buffer = new byte[1024];
-                    SystemClock.sleep(1000); //pause and wait for rest of data. Adjust this depending on your sending speed.
+                    buffer = new byte[1024*4];
+                    SystemClock.sleep(1000*3); //pause and wait for rest of data. Adjust this depending on your sending speed.
                     bytes = mmInStream.available(); // how many bytes are ready to be read?
                     bytes = mmInStream.read(buffer, 0, bytes); // record how many bytes we actually read
+
+                    bytes = mmInStream.read(buffer,0,bytes);
                     mHandler.obtainMessage(Bluetooth.MESSAGE_READ, bytes, -1, buffer)
                             .sendToTarget(); // Send the obtained bytes to the UI activity
 

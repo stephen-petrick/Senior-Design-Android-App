@@ -164,7 +164,8 @@ public class Bluetooth extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (mConnectedThread != null) //First check to make sure thread created
-                        mConnectedThread.write("1");
+//                        mConnectedThread.write("1");
+                        mConnectedThread.write("U");
                 }
             });
 
