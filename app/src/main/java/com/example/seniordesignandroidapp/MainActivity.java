@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,9 +15,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button switchToCloud = findViewById(R.id.cloud_button);
-        Button switchToBT = findViewById(R.id.BluetoothPage);
-        Button switchToGraphs = findViewById(R.id.Graphs);
+        ImageButton switchToCloud = (ImageButton) findViewById(R.id.cloud_imageButton);
+        ImageButton switchToBT = (ImageButton) findViewById(R.id.data_imageButton);
+        ImageButton switchToGraphs = (ImageButton) findViewById(R.id.graph_imageButton);
 
         switchToCloud.setOnClickListener(new View.OnClickListener() {
             @Override
