@@ -57,7 +57,7 @@ public class Cloud extends AppCompatActivity {
         select_file = findViewById(R.id.selectFile);
         upload = findViewById(R.id.upload);
         notification = findViewById(R.id.notification);
-        hardcodedFile = findViewById(R.id.hardcoded_button);
+        //hardcodedFile = findViewById(R.id.hardcoded_button);
 
         select_file.setOnClickListener(view -> {
 
@@ -84,11 +84,11 @@ public class Cloud extends AppCompatActivity {
 
         });
 
-        hardcodedFile.setOnClickListener(view -> {
-
-            fileUri = Uri.parse("/data/user/0/com.example.seniordesignandroidapp/file/file.txt");
-            uploadFile(fileUri);
-        });
+//        hardcodedFile.setOnClickListener(view -> {
+//
+//            fileUri = Uri.parse("/data/user/0/com.example.seniordesignandroidapp/file/file.txt");
+//            uploadFile(fileUri);
+//        });
 
     }
 
