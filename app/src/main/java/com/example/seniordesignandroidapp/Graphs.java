@@ -38,7 +38,7 @@ public class Graphs extends AppCompatActivity {
         graphData = (TextView) findViewById(R.id.graph_data);
         String[] arrContent = graphFromFile("file.txt");
         int testNum = Integer.parseInt(arrContent[0]);
-        boolean checkNull = arrContent[151].contains("NUL");
+//        boolean checkNull = arrContent[151].contains("NUL");
 
         // add data to series
         LineGraphSeries<DataPoint> s1 = new LineGraphSeries<DataPoint>();
@@ -49,12 +49,13 @@ public class Graphs extends AppCompatActivity {
         double totalPh = 0;
         ArrayList<Double> tempArr = new ArrayList<Double>();
         ArrayList<Double> phArr = new ArrayList<Double>();
-        Random rand = new Random();
-        for (int i = 2; i < 151; i+=3) {
-            double temp = Double.parseDouble(arrContent[i]) - 6800 + rand.nextDouble() * 10;
-            double pH = Double.parseDouble(arrContent[i+1]) + 94 + rand.nextDouble() * 3;
-            s1.appendData(new DataPoint((i-2)/3,temp), true, 150);
-            s2.appendData(new DataPoint((i-2)/3,pH), true, 150);
+        int len = arrContent.length;
+        for (int i = 2; i < arrContent.length; i+=3) {
+            double temp = Double.parseDouble(arrContent[i]);
+            double pH = Double.parseDouble(arrContent[i+1]);
+            double time = Double.parseDouble(arrContent[i-1]);
+            s1.appendData(new DataPoint(time,temp), true, 150);
+            s2.appendData(new DataPoint(time,pH), true, 150);
             tempArr.add(temp);
             phArr.add(pH);
             count++;
@@ -107,15 +108,15 @@ public class Graphs extends AppCompatActivity {
         }
         phStd = Math.sqrt(phStd/count);
 
-        graphData.setText("count                  : " + String.valueOf(count) + "\n" +
+        graphData.setText("count                     : " + String.valueOf(count) + "\n" +
                           "Temperature Mean : " + String.valueOf(meanTemp) + "\n" +
-                          "PH Mean                : " + String.valueOf(meanPh) + "\n" +
-                          "Temperature High : " + String.valueOf(highTemp) + "\n" +
-                          "Ph High                : " + String.valueOf(highPh) + "\n" +
-                          "Temperature Low  : " + String.valueOf(lowTemp) + "\n" +
-                          "Ph Low                 : " + String.valueOf(lowPh) + "\n" +
+                          "PH Mean                 : " + String.valueOf(meanPh) + "\n" +
+                          "Temperature High :  " + String.valueOf(highTemp) + "\n" +
+                          "Ph High                  : " + String.valueOf(highPh) + "\n" +
+                          "Temperature Low   : " + String.valueOf(lowTemp) + "\n" +
+                          "Ph Low                  : " + String.valueOf(lowPh) + "\n" +
                           "Temperature Std  : " + String.valueOf(tempStd) + "\n" +
-                          "pH Std                 : " + String.valueOf(phStd) + "\n");
+                          "pH Std                  : " + String.valueOf(phStd) + "\n");
     }
 
     // this event will enable the back
